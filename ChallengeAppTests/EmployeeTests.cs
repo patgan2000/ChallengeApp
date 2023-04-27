@@ -1,37 +1,47 @@
-namespace ChallengeApp.Tests;
-
- public class Tests
+namespace ChallengeApp.Tests
 {
-
-    [Test]
-
-    public void WhenEmployeeCollectsScore_ShouldCorrectSumAsResult()
-
+    public class EmployeTests
     {
 
-        //arrange
+        [Test]
+        public void WhenEmployeeCollectsGrades_ShouldGetAverage()
+        {
+            var emp = new Employee("Jan", "Kowalski");
+            emp.AddGrade(5);
+            emp.AddGrade(-5);
+            emp.AddGrade(-9);
 
-        var employee = new Employee("Jan", "Kowalski", 30);
+            var statistics = emp.GetStatistics();
 
-        employee.AddScore(2);
+            Assert.AreEqual(-3, statistics.Avr);
+        }
 
-        employee.AddScore(6);
+        [Test]
+        public void WhenEmployeeCollectsGrades_ShouldGetMin()
+        {
+            var emp = new Employee("Jan", "Kowalski");
+            emp.AddGrade(5);
+            emp.AddGrade(-5);
+            emp.AddGrade(-9);
 
-        employee.AddScore(4);
+            var statistics = emp.GetStatistics();
 
-        employee.AddScore(-8);
+            Assert.AreEqual(-9, statistics.Min);
+        }
 
-        employee.AddScore(-1);
+        [Test]
+        public void WhenEmployeeCollectsGrades_ShouldGetMax()
+        {
+            var emp = new Employee("Jan", "Kowalski");
+            emp.AddGrade(5);
+            emp.AddGrade(-5);
+            emp.AddGrade(-9);
+
+            var statistics = emp.GetStatistics();
+
+            Assert.AreEqual(5, statistics.Max);
 
 
-        //act
-
-        var result = employee.Result;
-
-
-        //assert
-
-        Assert.AreEqual(3, result);
-
+        }
     }
 }
