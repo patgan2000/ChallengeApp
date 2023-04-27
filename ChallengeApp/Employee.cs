@@ -4,17 +4,15 @@ namespace ChallengeApp
 {
     public class Employee
     {
+        private readonly char sex = 'M';
+
         private List<float> Grades = new List<float>();
-
-        public Employee()
-        {
-
-        }
 
         public Employee(string Name, string Surname)
         {
             this.Name = Name;
             this.Surname = Surname;
+            this.sex = 'K';
         }
         public string Name { get; private set; }
         public string Surname { get; private set; }
@@ -48,8 +46,7 @@ namespace ChallengeApp
                     AddGrade(1);
                     break;
                 default:
-                    Console.WriteLine("You entered a wrong character.");
-                    break;
+                    throw new Exception("You entered a wrong character");
             }
         }
 
@@ -61,7 +58,7 @@ namespace ChallengeApp
             }
             else
             {
-                Console.WriteLine("Invalid Grade Value. Try again.");
+                throw new Exception("Invalid Grade Value. Try again.");
             }
         }
         public void AddGrade(string grade)
@@ -72,7 +69,7 @@ namespace ChallengeApp
             }
             else
             {
-                Console.WriteLine("This is not a float value. Try again.");
+                throw new Exception("This is not a float value. Try again.");
             }
         }
         public void AddGrade(double grade)
