@@ -1,4 +1,6 @@
-﻿namespace ChallengeAppTests
+﻿using ChallengeApp;
+
+namespace ChallengeAppTests
 {
     public class TypeTests
     {
@@ -21,14 +23,14 @@
         [Test]
         public void VarAsReferenceType()
         {
-            var em1 = GetEmployee("Anna");
-            var em2 = GetEmployee("Anna");
+            var em1 = GetEmployee("Anna","Nowak");
+            var em2 = GetEmployee("Anna", "Nowak");
 
             Assert.AreNotEqual(em1, em2);
         }
-        private Employee GetEmployee(string name)
+        private Employee GetEmployee(string name, string surname)
         {
-            return new Employee(name);
+            return new Employee(name, surname);
         }
     }
 }
