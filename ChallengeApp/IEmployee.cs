@@ -17,7 +17,6 @@
         void AddGrade(float grade);
 
         void AddGrade(int grade);
-
         Statistics GetStatistics();
     }
 }
