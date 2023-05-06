@@ -96,6 +96,11 @@ namespace ChallengeApp
             this.AddGrade(gradeAsFloat);
         }
 
+        public void AddGrade(int grade)
+        {
+            float gradeAsFloat = grade;
+            this.AddGrade(gradeAsFloat);
+        }
 
         public void AddGrade(short grade)
         {
