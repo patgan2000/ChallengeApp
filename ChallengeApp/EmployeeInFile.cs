@@ -13,6 +13,26 @@ namespace ChallengeApp
         {
         }
 
+        public override void AddGrade(float grade)
+        {
+            using (var writer = File.AppendText(fileName))
+            {
+
+                if (grade >= 0 && grade <= 100)
+                {
+                    writer.WriteLine(grade);
+                    if (GradeAdded != null)
+                    {
+                        GradeAdded(this, new EventArgs());
+                    }
+                }
+                else
+                {
+                    throw new Exception("Invalid grade value.");
+                }
+            }
+        }
+
         public override void AddGrade(double grade)
         {
             using (var writer = File.AppendText(fileName))
@@ -34,26 +54,6 @@ namespace ChallengeApp
             using (var writer = File.AppendText(fileName))
             {
                 writer.WriteLine(grade);
-            }
-        }
-
-        public override void AddGrade(float grade)
-        {
-            using (var writer = File.AppendText(fileName)) 
-            {
-
-                if (grade >= 0 && grade <= 100)
-                {
-                    writer.WriteLine(grade);
-                    if (GradeAdded != null)
-                    {
-                        GradeAdded(this, new EventArgs());
-                    }
-                }
-                else
-                {
-                    throw new Exception("Invalid grade value.");
-                }
             }
         }
 
