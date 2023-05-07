@@ -1,7 +1,11 @@
-﻿namespace ChallengeApp
+﻿using static ChallengeApp.EmployeeInMemory;
+
+namespace ChallengeApp
 {
     public class EmployeeInFile : EmployeeBase
     {
+        public event GrageAddedDelagate GradeAdded;
+
         private const string fileName = "grades.txt";
 
         public EmployeeInFile(string name, string surname)
@@ -37,11 +41,47 @@
         {
             using (var writer = File.AppendText(fileName)) 
             {
-                writer.WriteLine(grade);
+
+                if (grade >= 0 && grade <= 100)
+                {
+                    writer.WriteLine(grade);
+                    if (GradeAdded != null)
+                    {
+                        GradeAdded(this, new EventArgs());
+                    }
+                }
+                else
+                {
+                    throw new Exception("Invalid grade value.");
+                }
             }
         }
 
         public override void AddGrade(int grade)
+        {
+            using (var writer = File.AppendText(fileName))
+            {
+                writer.WriteLine(grade);
+            }
+        }
+
+        public override void AddGrade(char grade)
+        {
+            using (var writer = File.AppendText(fileName))
+            {
+                writer.WriteLine(grade);
+            }
+        }
+
+        public override void AddGrade(long grade)
+        {
+            using (var writer = File.AppendText(fileName))
+            {
+                writer.WriteLine(grade);
+            }
+        }
+
+        public override void AddGrade(string grade)
         {
             using (var writer = File.AppendText(fileName))
             {
@@ -114,29 +154,6 @@
             return statistics;
         }
 
-        public override void AddGrade(char grade)
-        {
-            using (var writer = File.AppendText(fileName))
-            {
-                writer.WriteLine(grade);
-            }
-        }
-
-        public override void AddGrade(long grade)
-        {
-            using (var writer = File.AppendText(fileName))
-            {
-                writer.WriteLine(grade);
-            }
-        }
-
-        public override void AddGrade(string grade)
-        {
-            using (var writer = File.AppendText(fileName))
-            {
-                writer.WriteLine(grade);
-            }
-        }
 
     }
 }

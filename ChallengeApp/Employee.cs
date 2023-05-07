@@ -4,7 +4,7 @@ namespace ChallengeApp
 {
     public class Employee : Person
     {
-        private List<float> Grades = new List<float>();
+        private List<float> grades = new List<float>();
 
         public Employee()
         {
@@ -67,7 +67,7 @@ namespace ChallengeApp
         {
             if (grade >= 0 && grade <= 100)
             {
-                this.Grades.Add(grade);
+                this.grades.Add(grade);
             }
             else
             {
@@ -114,13 +114,13 @@ namespace ChallengeApp
             statistics.Min = float.MaxValue;
             statistics.Max = float.MinValue;
 
-            foreach (var grade in this.Grades)
+            foreach (var grade in this.grades)
             {
                 statistics.Max = Math.Max(statistics.Max, grade);
                 statistics.Min = Math.Min(statistics.Min, grade);
                 statistics.Avr += grade;
             }
-            statistics.Avr /= this.Grades.Count;
+            statistics.Avr /= this.grades.Count;
 
             switch (statistics.Avr)
             {
