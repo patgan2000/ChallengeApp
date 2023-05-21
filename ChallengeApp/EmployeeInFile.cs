@@ -1,6 +1,4 @@
-﻿using static ChallengeApp.EmployeeInMemory;
-
-namespace ChallengeApp
+﻿namespace ChallengeApp
 {
     public class EmployeeInFile : EmployeeBase
     {
@@ -67,9 +65,30 @@ namespace ChallengeApp
 
         public override void AddGrade(char grade)
         {
-            using (var writer = File.AppendText(fileName))
+            switch (grade)
             {
-                writer.WriteLine(grade);
+                case 'A':
+                case 'a':
+                    AddGrade(100);
+                    break;
+                case 'B':
+                case 'b':
+                    AddGrade(80);
+                    break;
+                case 'C':
+                case 'c':
+                    AddGrade(60);
+                    break;
+                case 'D':
+                case 'd':
+                    AddGrade(40);
+                    break;
+                case 'E':
+                case 'e':
+                    AddGrade(20);
+                    break;
+                default:
+                    throw new Exception("Wrong Letter");
             }
         }
 
@@ -118,39 +137,12 @@ namespace ChallengeApp
         private Statistics CountStatstic(List<float> grades)
         {
             var statistics = new Statistics();
-            statistics.Avr = 0;
-            statistics.Min = float.MaxValue;
-            statistics.Max = float.MinValue;
 
-            foreach (var grade in grades)
+            foreach (var grade in ReadGradesFromFile())
             {
-                statistics.Max = Math.Max(statistics.Max, grade);
-                statistics.Min = Math.Min(statistics.Min, grade);
-                statistics.Avr += grade;
+                statistics.AddGrade(grade);
             }
-            statistics.Avr /= grades.Count;
 
-            switch (statistics.Avr)
-            {
-                case var avr when avr >= 15:
-                    statistics.AvrLetter = 'A';
-                    break;
-                case var avr when avr >= 12:
-                    statistics.AvrLetter = 'B';
-                    break;
-                case var avr when avr >= 10:
-                    statistics.AvrLetter = 'C';
-                    break;
-                case var avr when avr >= 8:
-                    statistics.AvrLetter = 'D';
-                    break;
-                case var avr when avr >= 6:
-                    statistics.AvrLetter = 'E';
-                    break;
-                default:
-                    statistics.AvrLetter = 'F';
-                    break;
-            }
             return statistics;
         }
 

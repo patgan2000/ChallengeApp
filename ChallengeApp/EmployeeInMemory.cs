@@ -79,38 +79,10 @@
         public override Statistics GetStatistics()
         {
             var statistics = new Statistics();
-            statistics.Avr = 0;
-            statistics.Min = float.MaxValue;
-            statistics.Max = float.MinValue;
 
             foreach (var grade in this.grades)
             {
-                statistics.Max = Math.Max(statistics.Max, grade);
-                statistics.Min = Math.Min(statistics.Min, grade);
-                statistics.Avr += grade;
-            }
-            statistics.Avr /= this.grades.Count;
-
-            switch (statistics.Avr)
-            {
-                case var avr when avr >= 15:
-                    statistics.AvrLetter = 'A';
-                    break;
-                case var avr when avr >= 12:
-                    statistics.AvrLetter = 'B';
-                    break;
-                case var avr when avr >= 10:
-                    statistics.AvrLetter = 'C';
-                    break;
-                case var avr when avr >= 8:
-                    statistics.AvrLetter = 'D';
-                    break;
-                case var avr when avr >= 6:
-                    statistics.AvrLetter = 'E';
-                    break;
-                default:
-                    statistics.AvrLetter = 'F';
-                    break;
+                statistics.AddGrade(grade);
             }
 
             return statistics;

@@ -2,6 +2,7 @@
 public abstract class EmployeeBase : IEmployee
 {
     public delegate void GrageAddedDelagate(object senger, EventArgs args);
+
     public event GrageAddedDelagate GradeAdded;
 
     public EmployeeBase(string name, string surname)
@@ -30,6 +31,7 @@ public abstract class EmployeeBase : IEmployee
     public abstract void AddGrade(string grade);
 
     public abstract void AddGrade(short grade);
+
 
     public abstract Statistics GetStatistics();
 
