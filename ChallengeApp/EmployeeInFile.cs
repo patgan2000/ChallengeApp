@@ -2,7 +2,7 @@
 {
     public class EmployeeInFile : EmployeeBase
     {
-        public event GrageAddedDelagate GradeAdded;
+        public override event GrageAddedDelagate GradeAdded;
 
         private const string fileName = "grades.txt";
 
@@ -33,78 +33,75 @@
 
         public override void AddGrade(double grade)
         {
-            using (var writer = File.AppendText(fileName))
-            {
-                writer.WriteLine(grade);
-            }
+            float floatGrade = (float)grade;
+            this.AddGrade(floatGrade);
         }
 
         public override void AddGrade(short grade)
         {
-            using (var writer = File.AppendText(fileName))
-            {
-                writer.WriteLine(grade);
-            }
+            float floatGrade = (float)grade;
+            this.AddGrade(floatGrade);
         }
 
         public override void AddGrade(byte grade)
         {
-            using (var writer = File.AppendText(fileName))
-            {
-                writer.WriteLine(grade);
-            }
+            float floatGrade = (float)grade;
+            this.AddGrade(floatGrade);
         }
 
         public override void AddGrade(int grade)
         {
-            using (var writer = File.AppendText(fileName))
-            {
-                writer.WriteLine(grade);
-            }
+            float floatGrade = grade;
+            this.AddGrade(floatGrade);
         }
 
         public override void AddGrade(char grade)
         {
+            grade = Char.ToUpper(grade);
             switch (grade)
             {
                 case 'A':
-                case 'a':
-                    AddGrade(100);
+                    this.AddGrade(100);
                     break;
                 case 'B':
-                case 'b':
-                    AddGrade(80);
+                    this.AddGrade(80);
                     break;
                 case 'C':
-                case 'c':
-                    AddGrade(60);
+                    this.AddGrade(60);
                     break;
                 case 'D':
-                case 'd':
-                    AddGrade(40);
+                    this.AddGrade(40);
                     break;
                 case 'E':
-                case 'e':
-                    AddGrade(20);
+                    this.AddGrade(20);
                     break;
                 default:
-                    throw new Exception("Wrong Letter");
+                    throw new Exception("Wrong letter");
             }
         }
 
         public override void AddGrade(long grade)
         {
-            using (var writer = File.AppendText(fileName))
-            {
-                writer.WriteLine(grade);
-            }
+            float floatGrade = (float)grade;
+            this.AddGrade(floatGrade);
         }
 
         public override void AddGrade(string grade)
         {
-            using (var writer = File.AppendText(fileName))
+            if (float.TryParse(grade, out float result))
             {
-                writer.WriteLine(grade);
+                this.AddGrade(result);
+            }
+            else
+            {
+                if (grade.Length > 1)
+                {
+                    throw new Exception("String is not float");
+                }
+                else
+                {
+                    this.AddGrade(grade[0]);
+                }
             }
         }
 
